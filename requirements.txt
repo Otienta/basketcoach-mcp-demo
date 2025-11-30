@@ -3,7 +3,7 @@ torchvision==0.19.0+cpu
 torchaudio==2.4.0+cpu
 --extra-index-url https://download.pytorch.org/whl/cpu
 
-fastmcp==2.13.1
+# Streamlit first (avec ses versions spécifiques)
 streamlit==1.38.0
 pandas
 numpy
@@ -14,12 +14,24 @@ transformers
 nba_api
 plotly
 mlflow
+
+# FastMCP avec version compatible
+fastmcp==2.13.1
+
+# Web server
 uvicorn[standard]
 gunicorn
+
+# Utilitaires
 python-dotenv
 pydantic-settings
 httpx
 rich
+
+# Dev
 ruff
 pytest
 pytest-cov
+
+# Résolution du conflit cachetools
+cachetools==5.3.3
