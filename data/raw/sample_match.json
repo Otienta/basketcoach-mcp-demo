@@ -1,0 +1,71 @@
+{
+  "id": "2051529",
+  "date": "2024-01-15",
+  "clock": "00:00",
+  "period": 4,
+  "periodLength": 10,
+  "periodType": "REGULAR",
+  "inOT": 0,
+  "tm": {
+    "1": {
+      "name": "ESB VILLENEUVE D'ASCQ LILLE METROPOLE",
+      "code": "VIL",
+      "tot_sPoints": 78,
+      "tot_sReboundsTotal": 42,
+      "tot_sAssists": 20,
+      "tot_sSteals": 8,
+      "tot_sBlocks": 4,
+      "tot_sTurnovers": 12,
+      "pl": {
+        "1": {
+          "firstName": "Marine",
+          "familyName": "Johannès",
+          "shirtNumber": "23",
+          "starter": true,
+          "active": true,
+          "sPoints": 22,
+          "sReboundsTotal": 5,
+          "sAssists": 7,
+          "sSteals": 2,
+          "sBlocks": 1,
+          "sTurnovers": 3,
+          "sPlusMinusPoints": 15,
+          "sMinutes": "32:15",
+          "eff_1": 25,
+          "eff_2": 18,
+          "eff_3": 22
+        }
+      }
+    },
+    "2": {
+      "name": "BOURGES BASKET",
+      "code": "BOU",
+      "tot_sPoints": 72,
+      "tot_sReboundsTotal": 38,
+      "tot_sAssists": 18,
+      "tot_sSteals": 6,
+      "tot_sBlocks": 3,
+      "tot_sTurnovers": 14,
+      "pl": {
+        "1": {
+          "firstName": "Sarah",
+          "familyName": "Michel",
+          "shirtNumber": "5",
+          "starter": true,
+          "active": true,
+          "sPoints": 18,
+          "sReboundsTotal": 6,
+          "sAssists": 5,
+          "sSteals": 3,
+          "sBlocks": 0,
+          "sTurnovers": 2,
+          "sPlusMinusPoints": 8,
+          "sMinutes": "28:45",
+          "eff_1": 20,
+          "eff_2": 16,
+          "eff_3": 18
+        }
+      }
+    }
+  }
+}

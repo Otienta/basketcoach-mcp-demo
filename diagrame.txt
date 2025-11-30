@@ -1,0 +1,148 @@
+                     Streamlit (UI)
+                           │
+                           ▼
+                  MCPDirectClient (Client)
+                           │
+                   call_tool("get_xxx")
+                           │
+                           ▼
+             basketcoach_mcp_server.py (Serveur MCP)
+   ┌─────────────────────────────────────────────────────────┐
+   │                     OUTILS LOCAUX                       │
+   │  (fonctionnent sans internet - CSV, ML, RAG, Ollama)    │
+   │                                                         │
+   │  @mcp.tool get_player_impact()          ← local CSV + ML│
+   │  @mcp.tool get_match_analysis()         ← local CSV      │
+   │  @mcp.tool get_team_form()              ← local CSV      │
+   │  @mcp.tool search_guidelines()          ← RAG local      │
+   │  @mcp.tool generate_coaching_report()   ← ML + Ollama    │
+   │  @mcp.tool ask_coach_ai()               ← Ollama local   │
+   └─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+   ┌─────────────────────────────────────────────────────────┐
+   │                    OUTILS INTERNET                      │
+   │   (nécessitent une connexion réseau - API, scraping)    │
+   │                                                         │
+   │  @mcp.tool get_nba_player_stats()       ← NBA API        │
+   │  @mcp.tool get_nba_live_ranking()       ← Web scraping   │
+   │  @mcp.tool get_player_news()            ← Recherche Web  │
+   └─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+                JSON réponse (local ou internet)
+                           │
+                           ▼
+                     Affichage Streamlit
+
+
+┌───────────────────────────────┐
+│        STREAMLIT (UI)         │
+└───────────────────────────────┘
+                  │
+                  ▼
+┌───────────────────────────────┐
+│     MCP DIRECT CLIENT          │
+│  (call_tool("...") → serveur)  │
+└───────────────────────────────┘
+                  │
+                  ▼
+┌───────────────────────────────────────────────────────┐
+│  SERVEUR MCP – basketcoach_mcp_server (HTTP + STDIO)   │
+└───────────────────────────────────────────────────────┘
+                  │
+   ┌───────────────────────────────┬────────────────────────────────┐
+   │        OUTILS LOCAUX         │          OUTILS INTERNET        │
+   │     (pas besoin internet)     │          (requiert web)        │
+   ├───────────────────────────────┼────────────────────────────────┤
+   │ • get_player_impact()         │ • get_nba_live_ranking()       │
+   │ • get_match_analysis()        │      (scraping NBA)            │
+   │ • get_team_form()             │ • get_nba_player_stats()       │
+   │ • search_guidelines() (RAG)   │      (API NBA)                 │
+   │ • get_training_recommendations() │ • get_player_news()         │
+   │ • generate_coaching_report()  │      (recherche web)           │
+   │ • ask_coach_ai() (Ollama)     │                                │
+   └───────────────────────────────┴────────────────────────────────┘
+                  │
+                  ▼
+┌───────────────────────────────┐
+│      RÉPONSE JSON → UI        │
+└───────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                          STREAMLIT (UI)                                       │
+│                                    Utilise MCPDirectClient                                     │
+└───────────────────────────────────────────────────────────────────────────────────────────────┘
+                                                │
+                                                ▼
+   ┌──────────────────────────────────────────────────────────────────────────────────────────┐
+   │                               MCP DIRECT CLIENT (Python)                                 │
+   │                      convertit chaque appel en call_tool("xxx")                          │
+   └──────────────────────────────────────────────────────────────────────────────────────────┘
+                                                │
+                                                ▼
+                    ┌──────────────────────────────────────────────────────────────┐
+                    │               SERVEUR MCP (basketcoach_mcp_server)          │
+                    │      Expose les outils MCP + API HTTP (FastAPI)            │
+                    └──────────────────────────────────────────────────────────────┘
+                                                │
+       ┌──────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────┐
+       │                      OUTILS LOCAUX                        │                        OUTILS INTERNET                │
+       │             (fonctionnent sans internet)                  │                     (requièrent Internet)              │
+       ├───────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+       │ • get_player_impact()                                     │ • get_nba_live_ranking()                               │
+       │      → CSV + ML local                                     │       → Scraping Basketball-Reference                   │
+       │ • get_match_analysis()                                    │ • get_nba_player_stats()                               │
+       │      → Analyse CSV local                                  │       → API NBA officielle                              │
+       │ • get_team_form()                                         │ • get_player_news()                                     │
+       │      → Calcul statistiques                                │       → Recherche Google / Web                          │
+       │ • search_guidelines() (RAG local)                         │                                                         │
+       │      → recherche fichiers guidelines                      │                                                         │
+       │ • get_training_recommendations()                          │                                                         │
+       │ • generate_coaching_report() (Ollama)                     │                                                         │
+       │ • ask_coach_ai() (Ollama)                                 │                                                         │
+       └───────────────────────────────────────────────────────────┴────────────────────────────────────────────────────────┘
+                                                │
+                                                ▼
+                             ┌──────────────────────────────────────────┐
+                             │        RÉPONSE JSON → Streamlit          │
+                             └──────────────────────────────────────────┘
+
+                     Streamlit (UI)
+                           │
+                           ▼
+                MCPDirectClient (Client MCP)
+                           │
+                   call_tool("get_xxx")
+                           │
+                           ▼
+              basketcoach_mcp_server.py (Serveur MCP)
+      ┌─────────────────────────────────────────────────────────┐
+      │                       OUTILS LOCAUX                     │
+      │     (fonctionnent sans internet - CSV, ML, RAG, IA)     │
+      │                                                         │
+      │  @mcp.tool get_player_impact()        ← CSV + ML local  │
+      │  @mcp.tool get_match_analysis()       ← CSV local       │
+      │  @mcp.tool get_team_form()            ← CSV local       │
+      │  @mcp.tool search_guidelines()        ← RAG local       │
+      │  @mcp.tool get_training_recommendations() ← Généré local│
+      │  @mcp.tool generate_coaching_report() ← ML + Ollama     │
+      │  @mcp.tool ask_coach_ai()             ← Ollama local    │
+      └─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+      ┌─────────────────────────────────────────────────────────┐
+      │                     OUTILS INTERNET                     │
+      │    (nécessitent Internet - API officielles, scraping)   │
+      │                                                         │
+      │  @mcp.tool get_nba_player_stats()    ← NBA API          │
+      │  @mcp.tool get_nba_live_ranking()    ← Web scraping     │
+      │  @mcp.tool get_player_news()         ← Recherche Web    │
+      └─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+                Réponse JSON (local ou internet)
+                           │
+                           ▼
+                     Affichage Streamlit

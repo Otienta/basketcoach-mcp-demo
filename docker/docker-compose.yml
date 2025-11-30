@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  basketcoach-mcp:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - MCP_SERVER_HOST=0.0.0.0
+      - MCP_SERVER_PORT=8000
+      - LOG_LEVEL=INFO
+      - PYTHONPATH=/app
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./ml/model:/app/ml/model
+      - ./rag/guidelines:/app/rag/guidelines
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  mlflow:
+    image: python:3.11-slim
+    ports:
+      - "5000:5000"
+    environment:
+      - MLFLOW_TRACKING_URI=http://localhost:5000
+    working_dir: /app
+    command: >
+      sh -c "pip install mlflow pandas numpy &&
+             mlflow server --host 0.0.0.0 --port 5000
+             --backend-store-uri sqlite:///mlflow.db
+             --default-artifact-root ./mlruns"
+    volumes:
+      - ./mlruns:/app
+    restart: unless-stopped
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - MCP_SERVER_URL=http://basketcoach-mcp:8000
+      - STREAMLIT_SERVER_PORT=8501
+    depends_on:
+      basketcoach-mcp:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

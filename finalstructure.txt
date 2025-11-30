@@ -1,0 +1,74 @@
+basketcoach-mcp/
+├── 🚀 app.py                          # Interface Streamlit COMPLÈTE
+├── 🔧 basketcoach_mcp_server.py       # Serveur MCP principal
+├── 📡 mcp_direct_client.py            # Client MCP avec logging
+├── ⚙️ config.yaml                     # Configuration
+├── 📋 requirements.txt                # Dépendances
+├── 🏗️ setup.py
+├── 📚 README.md                       # MIS À JOUR avec CI/CD
+├── 🔐 .env
+├── .dockerignore
+│
+├── 🔧 .github/                        # ⭐ NOUVEAU - CI/CD
+│   └── workflows/
+│       ├── ci-cd.yml                  # Pipeline principal
+│       └── manual-deploy.yml          # Déploiement manuel
+│
+├── 🐳 docker/                         # ⭐ MIS À JOUR
+│   ├── Dockerfile
+│   ├── Dockerfile.streamlit
+│   ├── docker-compose.yml             # Développement
+│   └── docker-compose.prod.yml        # ⭐ NOUVEAU - Production
+│
+├── 📊 data/
+│   ├── raw/                          # JSON LFB bruts
+│   ├── processed/                    # Données traitées
+│   └── external/                     # Cache web scraping
+│
+├── 🤖 agents/
+│   ├── __init__.py
+│   ├── coaching_agent.py             # ✅ Analyse stratégique
+│   ├── scouting_agent.py             # ✅ Recrutement et analyse
+│   ├── smart_coaching_agent.py
+│   └── training_agent.py             # ✅ Préparation physique
+│
+├── 🌪️ airflow/                       # ⭐ RENOMMÉ (supprimer l'espace)
+│   └── dags/
+│       └── basketcoach_mcp_pipeline.py
+│
+├── 🧠 ml/
+│   ├── __init__.py
+│   ├── train.py                      # ✅ Entraînement modèle
+│   ├── predict.py                    # ✅ Prédictions
+│   └── model/                        # Modèles MLflow
+│
+├── 🔍 rag/
+│   ├── __init__.py
+│   ├── embed.py                      # ✅ Système RAG
+│   ├── search.py                     # ✅ Recherche guidelines
+│   └── guidelines/                   # Documents PDF
+│
+├── 🧪 tests/                         # ⭐ RENOMMÉ (supprimer l'espace)
+│   ├── test_coaching_agent.py
+│   ├── test_scouting_agent.py
+│   ├── test_training_agent.py
+│   ├── test_nba_scraping.py
+│   ├── test_mcp_tools.py
+│   └── __init__.py                   # ⭐ NOUVEAU
+│
+├── 🌐 utils/
+│   ├── __init__.py
+│   ├── data_processor.py             # ✅ Traitement JSON
+│   ├── ollama_client.py 
+│   ├── config.py
+│   └── logger.py                     # ✅ Logging centralisé
+│
+├── 📦 scripts/                       # ⭐ MIS À JOUR
+│   ├── __init__.py
+│   ├── run_mcp_server.py             # Lancement serveur
+│   ├── run_training.py               # ✅ Entraînement ML
+│   ├── setup_environment.py          # Configuration
+│   └── deploy.sh                     # ⭐ NOUVEAU - Déploiement
+│
+├── 🔧 nginx.conf                     # ⭐ NOUVEAU - Configuration Nginx
+└── 📝 .dockerignore                  # ⭐ NOUVEAU

@@ -1,0 +1,33 @@
+name: Manual Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to ${{ github.event.inputs.environment }}
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets[format('{0}_SERVER_HOST', github.event.inputs.environment)] }}
+        username: ${{ secrets[format('{0}_SERVER_USER', github.event.inputs.environment)] }}
+        key: ${{ secrets[format('{0}_SSH_KEY', github.event.inputs.environment)] }}
+        script: |
+          cd /opt/basketcoach-mcp
+          chmod +x scripts/deploy.sh
+          ./scripts/deploy.sh ${{ github.event.inputs.environment }}

@@ -1,0 +1,112 @@
+basketcoach-mcp/
+├── 🚀 app.py                    # Interface Streamlit
+├── 🔧 basketcoach_mcp_server.py  # Serveur MCP principal
+├── 📡 mcp_client.py            # Client MCP avec logging
+├── ⚙️ config.yaml              # Configuration
+├── 📋 requirements.txt         # Dépendances
+├── 🏗️ setup.py
+├── 📚 README.md
+├── 🔐 .env
+│
+├── 📊 data/
+│   ├── raw/                   # JSON LFB bruts
+│   ├── processed/             # Données traitées
+│   └── external/              # Cache web scraping
+│
+├── 🤖 agents/
+│   ├── __init__.py
+│   ├── coaching_agent.py      # Analyse stratégique
+│   ├── scouting_agent.py      # Recrutement et analyse
+│   ├── smart_coaching_agent.py
+│   └── training_agent.py      # Préparation physique
+│
+├──  airflow/
+│   └──  dags/
+│          └── basketcoach_mcp_pipeline.py
+│
+├── 🧠 ml/
+│   ├── __init__.py
+│   ├── train.py              # Entraînement modèle
+│   ├── predict.py            # Prédictions
+│   └── model/                # Modèles MLflow
+│
+├── 🔍 rag/
+│   ├── __init__.py
+│   ├── embed.py              # Système RAG
+│   ├── search.py             # Recherche guidelines
+│   └── guidelines/           # Documents PDF
+│   ├── __init__.py
+
+├──  tests/
+│   ├── test_coaching_agent.py
+│   ├── test_scouting_agent.py
+│   ├── test_training_agent.py
+│   ├── test_nba_scraping.py
+│   └── test_mcp_tools.py
+│
+├── 🌐 utils/
+│   ├── __init__.py
+│   ├── data_processor.py     # Traitement JSON
+│   ├── ollama_client.py 
+│   ├── config.py
+│   └── logger.py             # Logging centralisé
+│
+├── 📦 scripts/
+│   ├── __init__.py
+│   ├── run_mcp_server.py     # Lancement serveur
+│   ├── run_training.py       # Entraînement ML
+│   └── setup_environment.py  # Configuration
+│
+└── 🐳 docker/
+    ├── Dockerfile
+    └── docker-compose.yml
+
+└── .github/workflows/
+    └── ci-cd.yml                   # GitHub Actions (test + build + push Docker)
+
+
+basketcoach-mcp/
+├── app.py                          # Interface Streamlit finale (à venir)
+├── basketcoach_mcp_server.py       # Serveur MCP – 10 outils standard
+├── mcp_client.py                   # Client MCP
+├── requirements.txt
+├── README.md
+├── .env
+
+├── data/
+│   ├── raw/                        # Tes JSON LFB
+│   └── processed/all_matches_merged.csv
+
+├── agents/
+│   ├── coaching_agent.py
+│   ├── scouting_agent.py
+│   ├── training_agent.py
+│   └── smart_coaching_agent.py     # Rapport Ollama
+
+├── ml/
+│   ├── train.py
+│   └── predict.py
+
+├── rag/
+│   └── search.py                   # Guidelines médicales
+
+├── utils/
+│   ├── ollama_client.py            # Ollama local
+│   ├── data_processor.py
+│   ├── config.py
+│   └── logger.py
+
+├── tests/
+│   ├── test_coaching_agent.py
+│   ├── test_scouting_agent.py
+│   ├── test_training_agent.py
+│   └── test_nba_scraping.py        # Scraping léger NBA
+
+├── airflow/dags/
+│   └── basketcoach_mcp_pipeline.py
+
+└── docker/
+    ├── Dockerfile
+    └── docker-compose.yml
+
+source /home/students/Adapter/sk/sk_env/bin/activate

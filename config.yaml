@@ -1,0 +1,83 @@
+# basketcoach-mcp/config.yaml
+# BasketCoach MCP - Configuration Complète
+version: "1.0"
+description: "Plateforme de coaching basketball LFB avec MCP"
+
+# Chemins des données
+paths:
+  data:
+    raw: "data/raw/"
+    processed: "data/processed/"
+    external: "data/external/"
+    models: "ml/model/"
+  logs: "logs/"
+  rag: "rag/guidelines/"
+
+# Configuration MCP
+mcp:
+  server:
+    host: "localhost"
+    port: 8000
+    debug: true
+    log_level: "INFO"
+  client:
+    timeout: 30
+    max_retries: 3
+    health_check_interval: 60
+
+# Sources web
+web_sources:
+  lfb_ranking: "https://www.basketlfb.com/classement/"
+  ffbb_news: "https://www.ffbb.com/actualites"
+  eurobasket_stats: "https://basketball.eurobasket.com/France/LFB/"
+  injury_reports: "https://www.basketlfb.com/actualites/"
+  cache_duration: 3600  # 1 heure en secondes
+
+# Configuration ML
+ml:
+  model:
+    name: "player_impact_predictor"
+    version: "1.0.0"
+    features:
+      - "points"
+      - "rebounds"
+      - "assists"
+      - "steals"
+      - "blocks"
+      - "turnovers"
+      - "plus_minus"
+    target: "player_impact"
+  training:
+    test_size: 0.2
+    random_state: 42
+    cv_folds: 5
+
+# Configuration RAG
+rag:
+  guidelines_path: "rag/guidelines/"
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  chunk_size: 500
+  chunk_overlap: 50
+  similarity_threshold: 0.7
+
+# Features et pondérations
+features:
+  player_impact:
+    weights:
+      points: 1.0
+      rebounds: 0.7
+      assists: 0.8
+      steals: 1.2
+      blocks: 1.5
+      turnovers: -0.8
+      plus_minus: 0.5
+    thresholds:
+      high_impact: 25
+      medium_impact: 15
+      low_impact: 0
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/basketcoach.log"

@@ -1,0 +1,43 @@
+{
+  "name": "BasketCoach MCP",
+  "description": "Outils MCP pour analyse LFB + NBA live + IA coaching locale",
+  "version": "1.0.0",
+  "author": "Ton Nom",
+  "tools": [
+    {
+      "name": "get_player_impact",
+      "description": "Calcule l'impact prédit d'une joueuse LFB avec modèle ML local",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "match_id": { "type": "string", "description": "ID du match" },
+          "player_name": { "type": "string", "description": "Nom complet de la joueuse" }
+        },
+        "required": ["match_id", "player_name"]
+      }
+    },
+    {
+      "name": "get_current_lfb_ranking",
+      "description": "Classement NBA live réel (démonstration architecture live)",
+      "inputSchema": { "type": "object", "properties": {} }
+    },
+    {
+      "name": "ask_coach_ai",
+      "description": "Pose une question à un coach pro avec Ollama llama3.1 local",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "question": { "type": "string" } },
+        "required": ["question"]
+      }
+    },
+    {
+      "name": "get_match_analysis",
+      "description": "Analyse complète d'un match LFB",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "match_id": { "type": "string" } },
+        "required": ["match_id"]
+      }
+    }
+  ]
+}
