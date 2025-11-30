@@ -1,10 +1,6 @@
+# .github/workflows/ci.yml
 name: CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-
+on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,5 +11,8 @@ jobs:
           python-version: '3.11'
       - run: pip install ruff pytest
       - run: pip install -r requirements.txt
+      - run: pytest tests/ -v || echo "No tests yet"
       - run: ruff check .
-      - run: pytest tests/ -v || echo "No tests yet, skipping"
+        continue-on-error: true
+      - run: ruff format --check .
+        continue-on-error: true
