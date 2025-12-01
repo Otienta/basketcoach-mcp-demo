@@ -9,19 +9,26 @@
 
 **NBA-grade UI • MCP • RAG • MLflow • Airflow • CI/CD • Docker • LLM Agents**
 
-[![CI/CD](https://github.com/Otienta/basketcoach-mcp-demo/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Otienta/basketcoach-mcp-demo/actions)
-[![Coverage](https://codecov.io/gh/Otienta/basketcoach-mcp-demo/branch/main/graph/badge.svg)](https://codecov.io/gh/Otienta/basketcoach-mcp-demo)
+[![CI/CD](https://github.com/Otienta/basketcoach-mcp-demo/actions/workflows/cicd.yml/badge.svg)](https://github.com/Otienta/basketcoach-mcp-demo/actions/workflows/cicd.yml)
+[![Tests & Lint](https://github.com/Otienta/basketcoach-mcp-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/Otienta/basketcoach-mcp-demo/actions/workflows/ci.yml)
 [![Docker Image](https://img.shields.io/docker/pulls/otienta/basketcoach-mcp-demo)](https://hub.docker.com/r/otienta/basketcoach-mcp-demo)
 
-## 🚀 Démo Locale (5 min)
+## 🚀 Démo Locale (30 secondes)
 ```bash
-docker compose up --build
-# Puis ouvre http://localhost:8501
----
+git clone [https://github.com/Otienta/basketcoach-mcp-demo.git](https://github.com/Otienta/basketcoach-mcp-demo.git)
+cd basketcoach-mcp-demo/docker
+docker compose up -d
+
+# Puis ouvre ton navigateur :
+# → http://localhost:8501      ← Interface Streamlit complète
+# → http://localhost:8000/docs ← API MCP (Swagger)
+````
+
+-----
 
 > **La seule plateforme qui fait du coaching, du scouting, de l'entraînement et du MLOps dans une seule interface de malade.**
 
----
+-----
 
 ### Fonctionnalités Live (2025)
 
@@ -34,102 +41,103 @@ docker compose up --build
 | Rapport post-match IA       | Live     | MCP + RAG |
 | RAG Guidelines médicales    | Live     | FAISS + SentenceTransformers |
 | Prédiction Impact Joueur    | R²=0.995 | Random Forest + MLflow |
-| CI/CD Automatique           | Live     | GitHub Actions |
-| Docker + Multi-stage        | Live     | Docker |
+| CI/CD Automatique           | Live     | GitHub Actions → GHCR |
+| Docker Multi-image          | Live     | API + Streamlit séparés |
 
----
+-----
 
 ### Déploiement en 1 clic (2025)
 
 ```bash
-# Option 1 : Local
-docker compose up -d
+# Option 1 : Local (Méthode recommandée)
+cd docker && docker compose up -d
 
-# Option 2 : Cloud (Render, Railway, Fly.io)
-git push origin main  # déclenche CI/CD auto
+# Option 2 : Cloud (Render, Railway, Fly.io, etc.)
+git push origin main  # → CI/CD rebuild & push les images automatiquement sur GHCR
+```
 
----
+-----
 
 ## 🏷️ **Badges**
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10%2B-blue" />
-  <img src="https://img.shields.io/badge/MCP-Enabled-purple" />
-  <img src="https://img.shields.io/badge/MLflow-Tracking-orange" />
-  <img src="https://img.shields.io/badge/Airflow-Orchestration-red" />
-  <img src="https://img.shields.io/badge/Streamlit-UI-brightgreen" />
-  <img src="https://img.shields.io/badge/Docker-Containerized-cyan" />
-  <img src="https://img.shields.io/badge/Status-Active-success" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow" />
-</p>
+\<p align="center"\>
+\<img src="https://img.shields.io/badge/Python-3.11-blue" /\>
+\<img src="https://img.shields.io/badge/MCP-Enabled-purple" /\>
+\<img src="https://img.shields.io/badge/MLflow-Tracking-orange" /\>
+\<img src="https://img.shields.io/badge/Airflow-Orchestration-red" /\>
+\<img src="https://img.shields.io/badge/Streamlit-UI-brightgreen" /\>
+\<img src="https://img.shields.io/badge/Docker-Containerized-cyan" /\>
+\<img src="https://img.shields.io/badge/CI%2FCD-GHCR-success" /\>
+\<img src="https://img.shields.io/badge/License-MIT-yellow" /\>
+\</p\>
 
----
+-----
 
 # 📚 **Table des matières**
 
-1. [Introduction](#-introduction)
-2. [Fonctionnalités](#-fonctionnalités)
-3. [Architecture MLOps](#-architecture-mlops)
-4. [Installation rapide](#-installation-rapide)
-5. [Utilisation](#-utilisation)
-6. [API MCP](#-api-mcp)
-7. [Configuration](#-configuration)
-8. [Docker](#-docker)
-9. [Modèle ML](#-modèle-ml)
-10. [Contribuer](#-contribution)
-11. [Licence](#-license)
-12. [Remerciements](#-remerciements)
+1.  [Introduction](https://www.google.com/search?q=%23-introduction)
+2.  [Fonctionnalités](https://www.google.com/search?q=%23-fonctionnalit%C3%A9s)
+3.  [Architecture MLOps](https://www.google.com/search?q=%23-architecture-mlops)
+4.  [Installation rapide](https://www.google.com/search?q=%23-installation-rapide)
+5.  [Utilisation](https://www.google.com/search?q=%23-utilisation)
+6.  [API MCP](https://www.google.com/search?q=%23-api-mcp)
+7.  [Configuration](https://www.google.com/search?q=%23-configuration)
+8.  [Docker](https://www.google.com/search?q=%23-docker)
+9.  [Modèle ML](https://www.google.com/search?q=%23-mod%C3%A8le-ml)
+10. [Contribuer](https://www.google.com/search?q=%23-contribution)
+11. [Licence](https://www.google.com/search?q=%23-license)
+12. [Remerciements](https://www.google.com/search?q=%23-remerciements)
 
----
+-----
 
 # 🎯 **Introduction**
 
 **BasketCoach MCP** est une plateforme MLOps avancée qui combine :
 
-* **MLOps** : Gestion du cycle de vie des modèles avec MLFlow, orchestration des pipelines avec Airflow, CI/CD
-* **Données locales LFB** (JSON 2021-2024) et données externes (scraping)
-* **Intelligence artificielle** (modèle d'Impact Joueur) et **LLM** via *Model Context Protocol*
-* **Moteur RAG** pour les guidelines médicales et techniques
-* **Agents spécialisés** (coaching, scouting, entraînement)
+  * **MLOps** : Gestion du cycle de vie des modèles avec MLFlow, orchestration des pipelines avec Airflow, CI/CD
+  * **Données locales LFB** (JSON 2021-2024) et données externes (scraping)
+  * **Intelligence artificielle** (modèle d'Impact Joueur) et **LLM** via *Model Context Protocol*
+  * **Moteur RAG** pour les guidelines médicales et techniques
+  * **Agents spécialisés** (coaching, scouting, entraînement)
 
 Le tout dans **une seule interface intelligente** qui centralise *coaching*, *scouting*, *entraînement* et *analyse d'équipe* avec une approche MLOps.
 
----
+-----
 
 # ✨ **Fonctionnalités**
 
 ### 🔍 Analyse de Joueur et d'Équipe
 
-* **Impact ML** : Prédiction de l'impact des joueurs via un modèle Random Forest
-* **Historique multi-matchs** et comparaison joueur vs joueur
-* **Classement LFB** en temps réel et statistiques avancées
-* **Actualités**, blessures, articles web
+  * **Impact ML** : Prédiction de l'impact des joueurs via un modèle Random Forest
+  * **Historique multi-matchs** et comparaison joueur vs joueur
+  * **Classement LFB** en temps réel et statistiques avancées
+  * **Actualités**, blessures, articles web
 
 ### 🤖 Agents intelligents (LLM + MCP)
 
-* **Coaching Agent** : Analyse stratégique, plans de match, tendances adverses
-* **Scouting Agent** : Analyse approfondie des joueurs, comparaison, recommandations de recrutement
-* **Training Agent** : Programmes d'entraînement personnalisés, prévention des blessures
+  * **Coaching Agent** : Analyse stratégique, plans de match, tendances adverses
+  * **Scouting Agent** : Analyse approfondie des joueurs, comparaison, recommandations de recrutement
+  * **Training Agent** : Programmes d'entraînement personnalisés, prévention des blessures
 
 ### 📚 RAG Guidelines
 
-* Recherche sémantique dans les documents médicaux et techniques
-* Embeddings avec SentenceTransformers et recherche FAISS
+  * Recherche sémantique dans les documents médicaux et techniques
+  * Embeddings avec SentenceTransformers et recherche FAISS
 
 ### 🛠️ MCP (Model Context Protocol)
 
-* **9 outils MCP** disponibles : analyse de match, impact joueur, classement NBA, actualités, etc.
-* Logs en temps réel et tests intégrés dans Streamlit
+  * **9 outils MCP** disponibles : analyse de match, impact joueur, classement NBA, actualités, etc.
+  * Logs en temps réel et tests intégrés dans Streamlit
 
 ### 🚀 MLOps
 
-* **MLFlow** : Tracking des expériences, registre de modèles, gestion du cycle de vie
-* **Airflow** : Orchestration des pipelines de données et d'entraînement
-* **CI/CD** : Automatisation des tests, de la construction et du déploiement
-* **Docker** : Conteneurisation pour des environnements reproductibles
-* **Monitoring** : Métriques de performance, dérive des données et du concept
+  * **MLFlow** : Tracking des expériences, registre de modèles, gestion du cycle de vie
+  * **Airflow** : Orchestration des pipelines de données et d'entraînement
+  * **CI/CD** : Automatisation des tests, de la construction et du déploiement
+  * **Docker** : Conteneurisation pour des environnements reproductibles
+  * **Monitoring** : Métriques de performance, dérive des données et du concept
 
----
+-----
 
 # 🏗️ **Architecture MLOps**
 
@@ -145,6 +153,10 @@ basketcoach-mcp/
 ├── 🏗️ setup.py
 ├── 📚 README.md
 ├── 🔐 .env
+│
+├── .github/workflows/
+│   ├── cicd.yml        # Build & push API + Streamlit sur GHCR
+│   └── ci.yml          # Tests + Ruff
 │
 ├── 📊 data/
 │   ├── raw/                          # JSON LFB bruts
@@ -195,7 +207,8 @@ basketcoach-mcp/
 │   └── setup_environment.py          # Configuration
 │
 └── 🐳 docker/
-    ├── Dockerfile
+    ├── Dockerfile                     # Image du serveur MCP
+    ├── Dockerfile.streamlit           # Image de l'interface Streamlit
     └── docker-compose.yml
 ```
 
@@ -241,36 +254,36 @@ basketcoach-mcp/
 
 ## 🔄 **Workflow MLOps**
 
-1. **Ingestion des données** : Airflow orchestre la collecte et le prétraitement des données LFB et externes.
-2. **Entraînement du modèle** : Le pipeline d'entraînement est déclenché, les métriques et modèles sont suivis avec MLFlow.
-3. **Évaluation et validation** : Le modèle est évalué et, si les métriques sont satisfaisantes, il est promu en production.
-4. **Déploiement** : Le modèle est déployé via le pipeline CI/CD (container Docker, API, etc.).
-5. **Monitoring** : Surveillance des performances du modèle en production (dérive des données, métriques métier).
+1.  **Ingestion des données** : Airflow orchestre la collecte et le prétraitement des données LFB et externes.
+2.  **Entraînement du modèle** : Le pipeline d'entraînement est déclenché, les métriques et modèles sont suivis avec MLFlow.
+3.  **Évaluation et validation** : Le modèle est évalué et, si les métriques sont satisfaisantes, il est promu en production.
+4.  **Déploiement** : Le modèle est déployé via le pipeline CI/CD (container Docker, API, etc.).
+5.  **Monitoring** : Surveillance des performances du modèle en production (dérive des données, métriques métier).
 
----
+-----
 
 # 🚀 **Installation rapide**
 
-## 1. Cloner le projet
+## 1\. Cloner le projet
 
 ```bash
 git clone <repository>
 cd basketcoach-mcp
 ```
 
-## 2. Installer les dépendances
+## 2\. Installer les dépendances
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 3. Préparer les données
+## 3\. Préparer les données
 
 ```bash
 python -c "from utils.data_processor import process_data_pipeline; process_data_pipeline()"
 ```
 
-## 4. Lancer les services
+## 4\. Lancer les services
 
 ```bash
 # Serveur MCP
@@ -287,13 +300,13 @@ airflow webserver --port 8080
 airflow scheduler
 ```
 
-## 5. Accéder aux interfaces
+## 5\. Accéder aux interfaces
 
-* **Streamlit** : [http://localhost:8501](http://localhost:8501)
-* **MLflow** : [http://localhost:5000](http://localhost:5000)
-* **Airflow** : [http://localhost:8080](http://localhost:8080)
+  * **Streamlit** : [http://localhost:8501](https://www.google.com/search?q=http://localhost:8501)
+  * **MLflow** : [http://localhost:5000](https://www.google.com/search?q=http://localhost:5000)
+  * **Airflow** : [http://localhost:8080](https://www.google.com/search?q=http://localhost:8080)
 
----
+-----
 
 # 📊 **Utilisation**
 
@@ -301,18 +314,18 @@ airflow scheduler
 
 L'interface Streamlit permet d'accéder à toutes les fonctionnalités :
 
-* **Dashboard** : Vue d'ensemble des fonctionnalités et métriques
-* **NBA Live** : Classement NBA et statistiques joueurs
-* **Analyse Match** : Analyse stratégique des matchs LFB
-* **Scouting Joueur** : Analyse approfondie et comparaison de joueurs
-* **Programme Entraînement** : Programmes personnalisés et prévention des blessures
-* **Rapport Coaching** : Rapports post-match détaillés générés par IA
-* **MLOps Dashboard** : Surveillance des modèles et métriques MLOps
-* **Outil MCP** : Test direct des outils MCP
-* **Guidelines Basketball** : Recherche dans les guidelines médicales et techniques
-* **Configuration** : Statut des services et configuration
+  * **Dashboard** : Vue d'ensemble des fonctionnalités et métriques
+  * **NBA Live** : Classement NBA et statistiques joueurs
+  * **Analyse Match** : Analyse stratégique des matchs LFB
+  * **Scouting Joueur** : Analyse approfondie et comparaison de joueurs
+  * **Programme Entraînement** : Programmes personnalisés et prévention des blessures
+  * **Rapport Coaching** : Rapports post-match détaillés générés par IA
+  * **MLOps Dashboard** : Surveillance des modèles et métriques MLOps
+  * **Outil MCP** : Test direct des outils MCP
+  * **Guidelines Basketball** : Recherche dans les guidelines médicales et techniques
+  * **Configuration** : Statut des services et configuration
 
----
+-----
 
 # 📡 **API MCP**
 
@@ -329,7 +342,7 @@ guidelines = direct_client.search_guidelines("entorse cheville")
 coaching_report = direct_client.generate_coaching_report("2051529")
 ```
 
----
+-----
 
 # 🔧 **Configuration**
 
@@ -346,31 +359,40 @@ ml:
     name: "player_impact_predictor"
 
 web_sources:
-  lfb_ranking: "https://www.basketlfb.com/classement/"
+  lfb_ranking: "[https://www.basketlfb.com/classement/](https://www.basketlfb.com/classement/)"
 
 rag:
   guidelines_path: "rag/guidelines/"
 ```
 
----
+-----
 
 # 🐳 **Docker**
 
-Le projet peut être exécuté avec Docker :
+Le projet est conteneurisé avec une architecture multi-image (API + Streamlit).
 
 ```bash
-docker-compose -f docker/docker-compose.yml up -d
+# Développement local
+cd docker && docker compose up -d
+
+# Production (avec images taguées GHCR)
+cd docker && docker compose -f docker-compose.prod.yml up -d
 ```
 
----
+Les images sont publiées automatiquement sur **GitHub Container Registry (GHCR)** à chaque push sur `main` :
+
+  - `ghcr.io/otienta/basketcoach-mcp-demo:latest`
+  - `ghcr.io/otienta/basketcoach-mcp-demo-streamlit:latest`
+
+-----
 
 # 📈 **Modèle ML**
 
 Le modèle d'impact joueur est un Random Forest entraîné sur les données LFB.
 
-* **Features** : points, rebonds, passes, interceptions, contres, turnovers, plus/minus
-* **Target** : impact du joueur (formule pondérée)
-* **Performance** : R² ~0.995
+  * **Features** : points, rebonds, passes, interceptions, contres, turnovers, plus/minus
+  * **Target** : impact du joueur (formule pondérée)
+  * **Performance** : R² \~0.995
 
 Entraînement :
 
@@ -378,50 +400,51 @@ Entraînement :
 python scripts/run_training.py
 ```
 
-Tracking MLflow : [http://localhost:5000](http://localhost:5000)
+Tracking MLflow : [http://localhost:5000](https://www.google.com/search?q=http://localhost:5000)
 
----
+-----
+
 ## 🚀 CI/CD et Déploiement
 
-### GitHub Actions
-Le projet inclut un pipeline CI/CD complet :
+### GitHub Actions (actuel & fonctionnel)
 
-'''yaml
-- **Tests automatiques** sur 3 versions Python
-- **Linting** avec Ruff
-- **Build Docker** et push vers GitHub Container Registry
-- **Déploiement automatique** staging
-- **Déploiement manuel** production
+Le projet inclut un pipeline CI/CD complet (défini dans `.github/workflows/`) :
 
----
+  * **Tests automatiques** et **Linting** (via `ci.yml`)
+  * **Build Docker multi-image** (API + Streamlit)
+  * **Push vers GitHub Container Registry** (GHCR) (via `cicd.yml`)
+  * **Déploiement automatique** staging
+  * **Déploiement manuel** production
+
+-----
 
 # 🤝 **Contribution**
 
-Les contributions sont les bienvenues !
+Les contributions sont les bienvenues \!
 
-1. Forkez le projet
-2. Créez une branche (`git checkout -b feature/AmazingFeature`)
-3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Pushez la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
+1.  Forkez le projet
+2.  Créez une branche (`git checkout -b feature/AmazingFeature`)
+3.  Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
+4.  Pushez la branche (`git push origin feature/AmazingFeature`)
+5.  Ouvrez une Pull Request
 
----
+-----
 
 # 📝 **License**
 
 Distribué sous licence MIT. Voir `LICENSE` pour plus d'informations.
 
----
+-----
 
 # 🙏 **Remerciements**
 
-* Ligue Féminine de Basketball (LFB) pour les données
-* MLflow pour le tracking des modèles
-* Apache Airflow pour l'orchestration
-* Streamlit pour l'interface utilisateur
-* Model Context Protocol (MCP) pour l'intégration LLM
+  * Ligue Féminine de Basketball (LFB) pour les données
+  * MLflow pour le tracking des modèles
+  * Apache Airflow pour l'orchestration
+  * Streamlit pour l'interface utilisateur
+  * Model Context Protocol (MCP) pour l'intégration LLM
 
----
+-----
 
 # 🎯 **Use Cases**
 
@@ -430,40 +453,44 @@ Distribué sous licence MIT. Voir `LICENSE` pour plus d'informations.
 **Scénario** : Un club LFB veut recruter une joueuse pour combler un besoin spécifique.
 
 **Solution BasketCoach** :
-- Analyse des besoins via `ScoutingAgent.identify_recruitment_needs()`
-- Comparaison des joueuses disponibles avec `ScoutingAgent.compare_players()`
-- Génération d'un rapport de scouting complet
-- Surveillance continue des performances via le dashboard MLOps
+
+  - Analyse des besoins via `ScoutingAgent.identify_recruitment_needs()`
+  - Comparaison des joueuses disponibles avec `ScoutingAgent.compare_players()`
+  - Génération d'un rapport de scouting complet
+  - Surveillance continue des performances via le dashboard MLOps
 
 ## 🏥 Pour les Staffs Médicaux
 
 **Scénario** : Gestion des blessures et prévention.
 
 **Solution BasketCoach** :
-- Consultation des guidelines via `search_guidelines("prévention blessures cheville")`
-- Programmes de prévention personnalisés via `TrainingAgent`
-- Suivi de la récupération avec monitoring des métriques
+
+  - Consultation des guidelines via `search_guidelines("prévention blessures cheville")`
+  - Programmes de prévention personnalisés via `TrainingAgent`
+  - Suivi de la récupération avec monitoring des métriques
 
 ## 📊 Pour les Analystes Sportifs
 
 **Scénario** : Préparation tactique pour un match important.
 
 **Solution BasketCoach** :
-- Analyse des tendances adverses via `CoachingAgent.analyze_opponent_tendencies()`
-- Génération de plans de match personnalisés
-- Rapports post-match automatiques avec IA
+
+  - Analyse des tendances adverses via `CoachingAgent.analyze_opponent_tendencies()`
+  - Génération de plans de match personnalisés
+  - Rapports post-match automatiques avec IA
 
 ## 🔬 Pour les Data Scientists
 
 **Scénario** : Développement et monitoring de modèles ML.
 
 **Solution BasketCoach** :
-- Pipeline MLOps complet avec Airflow et MLflow
-- Tracking des expériences et versioning des modèles
-- Surveillance de la dérive des données et des concepts
-- Dashboard de monitoring en temps réel
 
----
+  - Pipeline MLOps complet avec Airflow et MLflow
+  - Tracking des expériences et versioning des modèles
+  - Surveillance de la dérive des données et des concepts
+  - Dashboard de monitoring en temps réel
+
+-----
 
 ## 🚀 **Différences MLOps vs DevOps**
 
@@ -476,18 +503,21 @@ Distribué sous licence MIT. Voir `LICENSE` pour plus d'informations.
 | **Tests** | Tests unitaires/intégration | Tests données + modèles + infrastructure |
 
 **BasketCoach MCP** implémente les bonnes pratiques MLOps avec :
-- ✅ **CI/CD** pour l'automatisation
-- ✅ **MLflow** pour la reproductibilité
-- ✅ **Airflow** pour l'orchestration
-- ✅ **Monitoring** pour la surveillance continue
-- ✅ **Conteneurisation** pour la portabilité
 
----
+  - ✅ **CI/CD** pour l'automatisation
+  - ✅ **MLflow** pour la reproductibilité
+  - ✅ **Airflow** pour l'orchestration
+  - ✅ **Monitoring** pour la surveillance continue
+  - ✅ **Conteneurisation** pour la portabilité
+
+-----
 
 # 📞 **Support**
 
 Pour toute question ou problème, ouvrez une issue sur le repository GitHub.
 
----
+-----
 
 **BasketCoach MCP** - *Révolutionnez votre approche du basketball avec l'IA et le MLOps* 🏀✨
+
+```
