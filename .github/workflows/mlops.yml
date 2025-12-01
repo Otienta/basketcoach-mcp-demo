@@ -1,0 +1,62 @@
+name: MLOps Pipeline - Auto Retrain
+
+on:
+  push:
+    paths:
+      - 'data/raw/**'
+      - 'ml/**'
+      - 'utils/data_processor.py'
+      - 'scripts/run_training.py'
+      - 'requirements.txt'
+  schedule:
+    - cron: '0 4 * * *'  # Tous les jours à 4h du mat
+
+jobs:
+  retrain-and-promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Process data + Retrain model
+        run: |
+          python -c "from utils.data_processor import process_data_pipeline; process_data_pipeline()"
+          python scripts/run_training.py --force-retrain
+
+      - name: Check if new model is better (R² > 0.99)
+        id: check_model
+        run: |
+          python - <<PY
+          import mlflow
+          client = mlflow.MlflowClient()
+          exp = client.get_experiment_by_name("basketcoach-mcp")
+          if exp is None:
+            print("No experiment found")
+            exit(0)
+          runs = client.search_runs(exp.experiment_id, order_by=["metrics.r2 DESC"], max_results=1)
+          if runs and runs[0].data.metrics.get("r2", 0) > 0.99:
+            print("New model is excellent → trigger Docker rebuild")
+            print("::set-output name=trigger_docker::true")
+          else:
+            print("Model not better than threshold")
+            print("::set-output name=trigger_docker::false")
+          PY
+
+      - name: Trigger Docker CI/CD rebuild (only if model improved)
+        if: steps.check_model.outputs.trigger_docker == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: rebuild-docker-images
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

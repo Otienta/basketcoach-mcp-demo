@@ -18,3 +18,16 @@ services:
     depends_on:
       - api
     restart: unless-stopped
+
+  airflow:
+    image: apache/airflow:2.9.0
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+      - ./ml:/opt/airflow/ml
+    ports:
+      - "8080:8080"
+    command: standalone
