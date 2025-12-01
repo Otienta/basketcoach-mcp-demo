@@ -50,6 +50,7 @@ pdfminer.six==20240706
 langchain==0.3.4
 
 # Dernières dépendances critiques pour MCP + PDF + HTML parsing
-langchain-community==0.3.4
-langchain-core==0.3.12
-langchain-text-splitters==0.3.2
+langchain
+langchain-community
+langchain-core
+langchain-text-splitters
